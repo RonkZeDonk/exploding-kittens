@@ -55,8 +55,15 @@ public class Card {
 				cardPanel.setBackground(color);
 			}
 
-			public void mouseClicked(java.awt.event.MouseEvent e) {}
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				destory();
+			}
 		});
+	}
+	
+	public void destory() {
+		ExplodingKittens.gameFrame.removeCardFromFrame(this);
+		ExplodingKittens.hand.cards.remove(this);
 	}
 
 	public String toString() {

@@ -3,8 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-
 import javax.swing.*;
 
 public class GameFrame extends JFrame implements KeyListener {
@@ -13,7 +11,7 @@ public class GameFrame extends JFrame implements KeyListener {
 	private boolean cardsPanelOpen = false;
 
 	public String gamemode;
-	
+
 	public GameFrame() {
 		super("Exploding Kittens");
 		setSize(1000, 600);
@@ -34,16 +32,16 @@ public class GameFrame extends JFrame implements KeyListener {
 		expandCardsPanel.setFocusable(false);
 		expandCardsPanel.setBackground(Color.white);
 		expandCardsPanel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
-		expandCardsPanel.setToolTipText("Expand Cards Drawer");
+		expandCardsPanel.setToolTipText("Expand/Shrink Cards Drawer");
 		expandCardsPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!cardsPanelOpen) {
-					// Open
+					// Open drawer
 					cardsScrollPane.setLocation(0, 232);
 					expandCardsPanel.setLocation(470, 207);
 					expandCardsPanel.setText("▼");
 				} else {
-					// Close
+					// Close drawer
 					cardsScrollPane.setLocation(0, 500);
 					expandCardsPanel.setLocation(470, 475);
 					expandCardsPanel.setText("▲");
@@ -57,26 +55,34 @@ public class GameFrame extends JFrame implements KeyListener {
 
 	public void changeGamemode(String gamemode) {
 		this.gamemode = gamemode;
-		this.setTitle("Exploding Kittens | " + this.gamemode);
+		this.setTitle("Exploding Kittens | In-Game | " + this.gamemode);
 	}
 
-	public void displayCardsOnFrame(ArrayList<Card> deck) {
+	public void refreshCardsFrame() {
+		cardsScrollPane.invalidate();
+		cardsScrollPane.validate();
+		cardsScrollPane.repaint();
+	}
+
+	public void displayCardsOnFrame(Hand hand) {
 		this.cardsPanel.removeAll();
 
-		deck.forEach(n -> this.cardsPanel.add(n.cardPanel));
+		hand.cards.forEach(n -> this.cardsPanel.add(n.cardPanel));
 	}
-	
+
+	public void removeCardFromFrame(Card card) {
+		this.cardsPanel.remove(card.cardPanel);
+		refreshCardsFrame();
+	}
+
 	public void keyReleased(KeyEvent e) {
-		// temp testing stuff
+		// temp testing stuff (remove the first card)
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			// cardsPanel.add(new Card("Insert", Color.orange).cardPanel, 0);
 			System.out.println("Removed a " + ExplodingKittens.deck.cards.remove(0).type);
-			displayCardsOnFrame(ExplodingKittens.deck.cards);
-			
-			// Repaint cards
-			cardsScrollPane.invalidate();
-			cardsScrollPane.validate();
-			cardsScrollPane.repaint();
+			displayCardsOnFrame(ExplodingKittens.hand);
+
+			refreshCardsFrame();
 		}
 	}
 

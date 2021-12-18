@@ -41,6 +41,7 @@ public class MainMenuFrame extends JFrame {
             }
         });
 
+        // Settings pannel
         JPanel userPanel = new JPanel();
         add(userPanel);
         userPanel.setBounds(500, 0, 500, 250);
