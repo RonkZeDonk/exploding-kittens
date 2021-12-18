@@ -20,7 +20,6 @@ public class GameFrame extends JFrame implements KeyListener {
 		setResizable(false);
 
 		cardsPanel = new JPanel();
-		cardsPanel.setBackground(Color.cyan);
 
 		cardsScrollPane = new JScrollPane(cardsPanel);
 		cardsScrollPane.setBounds(0, 0, 1000, 330);
@@ -40,8 +39,11 @@ public class GameFrame extends JFrame implements KeyListener {
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		// temp testing stuff
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			cardsPanel.add(new Card("Insert", Color.orange).cardPanel, 0);
+			// cardsPanel.add(new Card("Insert", Color.orange).cardPanel, 0);
+			System.out.println("Removed a " + ExplodingKittens.deck.cards.remove(0).type);
+			displayCardsOnFrame(ExplodingKittens.deck.cards);
 			
 			// Repaint cards
 			cardsScrollPane.invalidate();

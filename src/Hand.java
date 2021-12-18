@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class Hand {
-    public Card[] handCards = new Card[50];
+    public ArrayList<Card> handCards = new ArrayList<Card>();
 
     public Hand() {}
-    
-    public String toString() {
-        return "";
+
+    public void add(Card card) {
+        handCards.add(card);
     }
 }
