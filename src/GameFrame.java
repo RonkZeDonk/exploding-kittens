@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -32,12 +33,10 @@ public class GameFrame extends JFrame implements KeyListener {
 		this.setTitle("Exploding Kittens | " + this.gamemode);
 	}
 
-	public void addDeckToFrame(Card[] cards) {
+	public void displayCardsOnFrame(ArrayList<Card> deck) {
 		this.cardsPanel.removeAll();
-		for (int i = 0; i < cards.length; i++) {
-			if (cards[i] != null)
-				this.cardsPanel.add(cards[i].cardPanel);
-		}
+
+		deck.forEach(n -> this.cardsPanel.add(n.cardPanel));
 	}
 	
 	public void keyReleased(KeyEvent e) {

@@ -7,7 +7,7 @@ public class ExplodingKittens {
 	public static void main(String[] args) {
 
 		deck.shuffleDeck();
-		gameFrame.addDeckToFrame(deck.cards);
+		gameFrame.displayCardsOnFrame(deck.deck);
 
 		mainMenuFrame.setVisible(true);
 	}
