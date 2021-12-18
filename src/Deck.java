@@ -10,6 +10,7 @@ public class Deck {
         createDeck();
     }
 
+    // Some cards are renamed to better fit screen
     private void createDeck() {
         for (int i = 0; i < 56; i++) {
             if ((i <= 3))

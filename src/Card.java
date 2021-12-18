@@ -25,7 +25,7 @@ public class Card {
 		cardPanel.setBackground(color);
 		// Padding with border (stackoverflow.com/questions/5328405/jpanel-padding-in-java (first comment in answer))
 		cardPanel.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(Color.black, 1),
+				BorderFactory.createLineBorder(Color.black, 2),
 				new EmptyBorder(10, 10, 10, 10)
 			));
 

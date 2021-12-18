@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import javax.swing.*;
 public class GameFrame extends JFrame implements KeyListener {
 	public JPanel cardsPanel;
 	public JScrollPane cardsScrollPane;
+	private boolean cardsPanelOpen = false;
 
 	public String gamemode;
 	
@@ -20,11 +23,36 @@ public class GameFrame extends JFrame implements KeyListener {
 		setResizable(false);
 
 		cardsPanel = new JPanel();
-
 		cardsScrollPane = new JScrollPane(cardsPanel);
-		cardsScrollPane.setBounds(0, 0, 1000, 330);
+		cardsScrollPane.setBounds(0, 500, 985, 330);
 		cardsScrollPane.getHorizontalScrollBar().setUnitIncrement(24);
 		add(cardsScrollPane);
+
+		// △▽  ▲▼
+		JButton expandCardsPanel = new JButton("▲");
+		expandCardsPanel.setBounds(470, 475, 60, 25);
+		expandCardsPanel.setFocusable(false);
+		expandCardsPanel.setBackground(Color.white);
+		expandCardsPanel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
+		expandCardsPanel.setToolTipText("Expand Cards Drawer");
+		expandCardsPanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!cardsPanelOpen) {
+					// Open
+					cardsScrollPane.setLocation(0, 232);
+					expandCardsPanel.setLocation(470, 207);
+					expandCardsPanel.setText("▼");
+				} else {
+					// Close
+					cardsScrollPane.setLocation(0, 500);
+					expandCardsPanel.setLocation(470, 475);
+					expandCardsPanel.setText("▲");
+				}
+				cardsPanelOpen = !cardsPanelOpen;
+			}
+		});
+		expandCardsPanel.setBounds(470, 475, 60, 25);
+		add(expandCardsPanel);
 	}
 
 	public void changeGamemode(String gamemode) {
