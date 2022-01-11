@@ -17,4 +17,26 @@ public class Hand {
     public void add(Card card) {
         cards.add(card);
     }
+
+    public void play(Card card) {
+        cards.remove(card);
+        ExplodingKittens.gameFrame.refreshCardsFrame();
+    }
+
+    public int handValue() {
+        // Hand value based on the current hand
+        // used to see which AI wins after player loses
+        return 0;
+    }
+
+    public String toString() {
+        String returnString = "Hand: ";
+
+        for (int i = 0; i < cards.size(); i++) {
+            if (i != 0) returnString += ", ";
+            returnString += cards.get(i).type;
+        }
+
+        return returnString;
+    }
 }

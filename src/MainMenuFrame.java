@@ -12,6 +12,14 @@ public class MainMenuFrame extends JFrame {
 		setResizable(false);
         setLayout(null);
 
+        JLabel title = new JLabel("Exploding Kittens");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setFont(new Font("Sans Serif", Font.PLAIN, 64));
+        title.setBounds(0, 300, 1000, 200);
+        // title.setOpaque(true);
+        // title.setBackground(Color.red);
+        add(title);
+
         JButton normalMode_btn = new JButton("Normal Mode");
         add(normalMode_btn);
         normalMode_btn.setBounds(0, 0, 250, 250);

@@ -5,8 +5,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class Card {
+	public static final int CARD_WIDTH = 220;
+	public static final int CARD_HEIGHT = 300;
+
 	public String type;
 	public Color color;
+	public boolean handCard = true;
 
 	public JPanel cardPanel = new JPanel();
 
@@ -20,12 +24,12 @@ public class Card {
 	private void makeCardFrame() {
 		final String FONT_FACE = "Sans Serif";
 
-		cardPanel.setPreferredSize(new Dimension(220, 300));
+		cardPanel.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
 		cardPanel.setLayout(new GridBagLayout());
 		cardPanel.setBackground(color);
 		// Padding with border (stackoverflow.com/questions/5328405/jpanel-padding-in-java (first comment in answer))
 		cardPanel.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(Color.black, 2),
+				BorderFactory.createLineBorder(Color.darkGray, 2),
 				new EmptyBorder(10, 10, 10, 10)
 			));
 
@@ -48,19 +52,26 @@ public class Card {
 
 		cardPanel.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(java.awt.event.MouseEvent e) {
-				cardPanel.setBackground(Color.lightGray);
+				if (handCard)
+					cardPanel.setBackground(Color.lightGray);
 			}
 
 			public void mouseExited(java.awt.event.MouseEvent e) {
-				cardPanel.setBackground(color);
+				if (handCard)
+					cardPanel.setBackground(color);
 			}
 
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				destory();
+				if (handCard)
+					destory();
 			}
 		});
 	}
-	
+
+	public void isHandCard(boolean value) {
+		this.handCard = value;
+	}
+
 	public void destory() {
 		ExplodingKittens.gameFrame.removeCardFromFrame(this);
 		ExplodingKittens.hand.cards.remove(this);
@@ -68,5 +79,20 @@ public class Card {
 
 	public String toString() {
 		return "Card: " + this.type + ", Color: " + this.color;
+	}
+	
+	interface onClickEvent {
+		void call();
+	}
+	public void onClick(onClickEvent event) {
+		cardPanel.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent e) {}
+
+			public void mouseExited(java.awt.event.MouseEvent e) {}
+
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				event.call();
+			}
+		});
 	}
 }

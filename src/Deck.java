@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    // public Card cards[] = new Card[56];
     public ArrayList<Card> cards = new ArrayList<Card>();
 
     public Deck() {
@@ -66,4 +65,23 @@ public class Deck {
     public void shuffleDeck() {
 		Collections.shuffle(cards);
 	}
+
+    public void addExplodingKittens(int n) {
+        for (int i = 0; i < n; i++) {
+            cards.add(new Card("Exploding Kitten", Color.black));
+        }
+        shuffleDeck();
+        ExplodingKittens.gameFrame.refreshCardsFrame();
+    }
+
+    public String toString() {
+        String returnString = "Deck: ";
+
+        for (int i = 0; i < cards.size(); i++) {
+            if (i != 0) returnString += ", ";
+            returnString += cards.get(i).type;
+        }
+
+        return returnString;
+    }
 }
