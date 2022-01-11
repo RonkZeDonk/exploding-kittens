@@ -7,6 +7,8 @@ public class MainMenuFrame extends JFrame {
 
     public MainMenuFrame(GameFrame gameFrame) {
         super("Exploding Kittens | Main Menu");
+        ImageIcon icon = new ImageIcon("img/icon.png");
+		setIconImage(icon.getImage());
         setSize(1000, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
