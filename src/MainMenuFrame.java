@@ -20,14 +20,14 @@ public class MainMenuFrame extends JFrame {
         // title.setBackground(Color.red);
         add(title);
 
-        JButton normalMode_btn = new JButton("Normal Mode");
+        JButton normalMode_btn = new JButton("Singleplayer");
         add(normalMode_btn);
         normalMode_btn.setBounds(0, 0, 250, 250);
         normalMode_btn.setFocusable(false);
         normalMode_btn.setBackground(Color.lightGray);
         normalMode_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameFrame.changeGamemode("Normal");
+                gameFrame.changeGamemode("Singleplayer");
                 gameFrame.setVisible(true);
                 gameFrame.setLocation(getLocation());
                 setVisible(false);
@@ -42,7 +42,7 @@ public class MainMenuFrame extends JFrame {
         partyMode_btn.setBackground(Color.lightGray);
         partyMode_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameFrame.changeGamemode("Party");
+                gameFrame.changeGamemode("Party (Multiplayer)");
                 gameFrame.setVisible(true);
                 gameFrame.setLocation(getLocation());
                 setVisible(false);
