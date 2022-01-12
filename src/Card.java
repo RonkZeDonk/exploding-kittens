@@ -17,8 +17,14 @@ public class Card {
 	public Card(String type, Color color) {
 		this.type = type;
 		this.color = color;
-
+		switch (type)
+		{
+			case "Skip":
+			cardPanel.setToolTipText("trolling");
+			break;
+		}
 		makeCardFrame();
+	
 	}
 
 	private void makeCardFrame() {
