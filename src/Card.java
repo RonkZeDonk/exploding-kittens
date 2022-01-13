@@ -8,28 +8,104 @@ public class Card extends JPanel {
   public static final int CARD_WIDTH = 220;
   public static final int CARD_HEIGHT = 300;
 
-  public String type;
+  public static final int DEFUSE = 0;
+  public static final int SKIP = 1;
+  public static final int FAVOR = 2;
+  public static final int ATTACK = 3;
+  public static final int SHUFFLE = 4;
+  public static final int NOPE = 5;
+  public static final int PEAK_FUTURE = 6;
+  public static final int RAINBOW_CAT = 7;
+  public static final int BEARD_CAT = 8;
+  public static final int CATTERMELON = 9;
+  public static final int POTATO_CAT = 10;
+  public static final int TACOCAT = 11;
+  public static final int EXPLODING_KITTEN = 12;
+
+  public int type;
+  public String name;
   public Color color;
   private boolean handCard = true;
 
-  public Card(String type) {
+  public Card(int type) {
     this.type = type;
 
     initCard();
     makeCardFrame();
   }
-  public Card(String type, Color color) {
-    this.type = type;
+  public Card(String name, Color color) {
+    this.name = name;
     this.color = color;
 
-    initCard();
     makeCardFrame();
   }
 
   private void initCard() {
     switch (type) {
-      case "Skip":
+      case DEFUSE:
+        name = "Defuse";
+        color = Color.green;
+        setToolTipText("");
+        break;
+      case SKIP:
+        name = "Skip";
+        color = Color.blue;
         setToolTipText("trolling");
+        break;
+      case FAVOR:
+        name = "Favor";
+        color = Color.black;
+        setToolTipText("");
+        break;
+      case ATTACK:
+        name = "Attack";
+        color = Color.orange;
+        setToolTipText("");
+        break;
+      case SHUFFLE:
+        name = "Shuffle";
+        color = Color.gray;
+        setToolTipText("");
+        break;
+      case NOPE:
+        name = "Nope";
+        color = Color.red;
+        setToolTipText("");
+        break;
+      case PEAK_FUTURE:
+        name = "Peak Future";
+        color = Color.pink;
+        setToolTipText("");
+        break;
+      case RAINBOW_CAT:
+        name = "Rainbow Cat";
+        color = Color.white;
+        setToolTipText("");
+        break;
+      case BEARD_CAT:
+        name = "Beard Cat";
+        color = Color.white;
+        setToolTipText("");
+        break;
+      case CATTERMELON:
+        name = "Cattermelon";
+        color = Color.white;
+        setToolTipText("");
+        break;
+      case POTATO_CAT:
+        name = "Potato Cat";
+        color = Color.white;
+        setToolTipText("");
+        break;
+      case TACOCAT:
+        name = "Tacocat";
+        color = Color.white;
+        setToolTipText("");
+        break;
+      case EXPLODING_KITTEN:
+        name = "Exploding Kitten";
+        color = Color.black;
+        setToolTipText("");
         break;
     }
   }
@@ -49,7 +125,7 @@ public class Card extends JPanel {
 
     GridBagConstraints c = new GridBagConstraints();
 
-    JLabel title = new JLabel(this.type);
+    JLabel title = new JLabel(this.name);
     title.setFont(new Font(FONT_FACE, Font.PLAIN, 24));
     title.setHorizontalAlignment(JLabel.CENTER);
     c.gridx = 0;
@@ -92,7 +168,7 @@ public class Card extends JPanel {
   }
 
   public String toString() {
-    return "Card: " + this.type + ", Color: " + this.color;
+    return "Card: " + this.name + ", Color: " + this.color;
   }
 
   interface onClickEvent {

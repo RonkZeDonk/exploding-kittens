@@ -6,7 +6,7 @@ public class Hand {
 
   public Hand() {
     // Add a defuse to each hand
-    add(new Card("Defuse", Color.green));
+    add(new Card(Card.DEFUSE));
 
     // Start hand with 7 cards from the deck
     for (int i = 0; i < 7; i++) {
@@ -35,7 +35,7 @@ public class Hand {
     for (int i = 0; i < cards.size(); i++) {
       if (i != 0)
         returnString += ", ";
-      returnString += cards.get(i).type;
+      returnString += cards.get(i).name;
     }
 
     return returnString;

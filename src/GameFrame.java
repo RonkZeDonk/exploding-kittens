@@ -114,7 +114,7 @@ public class GameFrame extends JFrame implements KeyListener {
     player3Name.setForeground(Color.black);
     tablePanel.add(player3Name);
 
-    Card tableCard = new Card("Exploding Kitten", Color.black);
+    Card tableCard = new Card(Card.EXPLODING_KITTEN);
     tableCard.isHandCard(false);
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tablePanel.add(tableCard);
