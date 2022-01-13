@@ -4,38 +4,46 @@ import java.awt.event.MouseAdapter;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class Card {
+public class Card extends JPanel {
   public static final int CARD_WIDTH = 220;
   public static final int CARD_HEIGHT = 300;
 
   public String type;
   public Color color;
-  public boolean handCard = true;
+  private boolean handCard = true;
 
-  public JPanel cardPanel = new JPanel();
+  public Card(String type) {
+    this.type = type;
 
+    initCard();
+    makeCardFrame();
+  }
   public Card(String type, Color color) {
     this.type = type;
     this.color = color;
+
+    initCard();
+    makeCardFrame();
+  }
+
+  private void initCard() {
     switch (type) {
       case "Skip":
-        cardPanel.setToolTipText("trolling");
+        setToolTipText("trolling");
         break;
     }
-    makeCardFrame();
-
   }
 
   private void makeCardFrame() {
     final String FONT_FACE = "Sans Serif";
 
-    cardPanel.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
-    cardPanel.setLayout(new GridBagLayout());
-    cardPanel.setBackground(color);
+    setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+    setLayout(new GridBagLayout());
+    setBackground(color);
     // Padding with border
     // (stackoverflow.com/questions/5328405/jpanel-padding-in-java (first comment in
     // answer))
-    cardPanel.setBorder(BorderFactory.createCompoundBorder(
+    setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(Color.darkGray, 2),
         new EmptyBorder(10, 10, 10, 10)));
 
@@ -46,7 +54,7 @@ public class Card {
     title.setHorizontalAlignment(JLabel.CENTER);
     c.gridx = 0;
     c.gridy = 0;
-    cardPanel.add(title, c);
+    add(title, c);
 
     JLabel typeText = new JLabel("Details");
     typeText.setFont(new Font(FONT_FACE, Font.PLAIN, 16));
@@ -54,17 +62,17 @@ public class Card {
     c.insets = new Insets(220, 0, 0, 0);
     c.gridx = 0;
     c.gridy = 1;
-    cardPanel.add(typeText, c);
+    add(typeText, c);
 
-    cardPanel.addMouseListener(new MouseAdapter() {
+    addMouseListener(new MouseAdapter() {
       public void mouseEntered(java.awt.event.MouseEvent e) {
         if (handCard)
-          cardPanel.setBackground(Color.lightGray);
+          setBackground(Color.lightGray);
       }
 
       public void mouseExited(java.awt.event.MouseEvent e) {
         if (handCard)
-          cardPanel.setBackground(color);
+          setBackground(color);
       }
 
       public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -92,7 +100,7 @@ public class Card {
   }
 
   public void onClick(onClickEvent event) {
-    cardPanel.addMouseListener(new MouseAdapter() {
+    addMouseListener(new MouseAdapter() {
       public void mouseEntered(java.awt.event.MouseEvent e) {
       }
 

@@ -79,11 +79,11 @@ public class GameFrame extends JFrame implements KeyListener {
   public void displayHandOnFrame(Hand hand) {
     this.cardsPanel.removeAll();
 
-    hand.cards.forEach(n -> this.cardsPanel.add(n.cardPanel));
+    hand.cards.forEach(n -> this.cardsPanel.add(n));
   }
 
   public void removeCardFromFrame(Card card) {
-    this.cardsPanel.remove(card.cardPanel);
+    this.cardsPanel.remove(card);
     refreshCardsFrame();
   }
 
@@ -116,17 +116,17 @@ public class GameFrame extends JFrame implements KeyListener {
 
     Card tableCard = new Card("Exploding Kitten", Color.black);
     tableCard.isHandCard(false);
-    tableCard.cardPanel.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
-    tablePanel.add(tableCard.cardPanel);
+    tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
+    tablePanel.add(tableCard);
 
     Card cardPileFrame = new Card("Pickup Card", Color.white);
-    cardPileFrame.cardPanel.setBounds(50, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
+    cardPileFrame.setBounds(50, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     cardPileFrame.onClick(() -> {
       // Add new card from deck to hand
       // if the card is an exploding kitten show on table...
       System.out.println("Hey");
     });
-    tablePanel.add(cardPileFrame.cardPanel);
+    tablePanel.add(cardPileFrame);
   }
 
   public void changeGamemode(String gamemode) {
