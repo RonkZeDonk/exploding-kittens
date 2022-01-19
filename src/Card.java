@@ -26,6 +26,7 @@ public class Card extends JPanel {
   public String name;
   public Color color;
   private boolean handCard = true;
+  private boolean disabled = false;
 
   public Card(int type) {
     this.type = type;
@@ -140,17 +141,17 @@ public class Card extends JPanel {
 
     addMouseListener(new MouseAdapter() {
       public void mouseEntered(java.awt.event.MouseEvent e) {
-        if (handCard)
+        if (!disabled && handCard)
           setBackground(Color.lightGray);
       }
 
       public void mouseExited(java.awt.event.MouseEvent e) {
-        if (handCard)
+        if (!disabled && handCard)
           setBackground(color);
       }
 
       public void mouseClicked(java.awt.event.MouseEvent e) {
-        if (handCard)
+        if (!disabled && handCard)
           destory();
       }
     });
@@ -158,6 +159,10 @@ public class Card extends JPanel {
 
   public void isHandCard(boolean value) {
     this.handCard = value;
+  }
+
+  public void setDisabled(boolean value) {
+    disabled = value;
   }
 
   public void destory() {
@@ -182,7 +187,8 @@ public class Card extends JPanel {
       }
 
       public void mouseClicked(java.awt.event.MouseEvent e) {
-        event.call();
+        if (!disabled)
+          event.call();
       }
     });
   }

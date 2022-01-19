@@ -11,6 +11,7 @@ public class GameFrame extends JFrame implements KeyListener {
   private boolean cardsPanelOpen = false;
 
   public JPanel tablePanel;
+  Card cardPileFrame;
 
   public String gamemode;
 
@@ -56,11 +57,13 @@ public class GameFrame extends JFrame implements KeyListener {
           cardsScrollPane.setLocation(0, 232);
           expandCardsPanel.setLocation(470, 207);
           expandCardsPanel.setText("▼");
+          cardPileFrame.setDisabled(true);
         } else {
           // Close drawer
           cardsScrollPane.setLocation(0, 500);
           expandCardsPanel.setLocation(470, 475);
           expandCardsPanel.setText("▲");
+          cardPileFrame.setDisabled(false);
         }
         cardsPanelOpen = !cardsPanelOpen;
       }
@@ -118,7 +121,7 @@ public class GameFrame extends JFrame implements KeyListener {
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tablePanel.add(tableCard);
 
-    Card cardPileFrame = new Card("Pickup Card", Color.white);
+    cardPileFrame = new Card("Pickup Card", Color.white);
     cardPileFrame.setBounds(50, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     cardPileFrame.onClick(() -> {
       // Add new card from deck to hand
