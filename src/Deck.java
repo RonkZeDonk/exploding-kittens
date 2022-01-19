@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -75,6 +74,10 @@ public class Deck {
 
   public void shuffleDeck() {
     Collections.shuffle(cards);
+  }
+
+  public Card pickupCard() {
+    return cards.remove(0);
   }
 
   public void addExplodingKittens(int n) {

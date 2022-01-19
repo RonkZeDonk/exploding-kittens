@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.awt.*;
 
 public class Hand {
   public ArrayList<Card> cards = new ArrayList<Card>();
@@ -18,6 +17,10 @@ public class Hand {
     cards.add(card);
   }
 
+  public void add(int index, Card card) {
+    cards.add(index, card);
+  }
+
   public void play(Card card) {
     cards.remove(card);
     ExplodingKittens.gameFrame.refreshCardsFrame();
@@ -26,7 +29,12 @@ public class Hand {
   public int handValue() {
     // Hand value based on the current hand
     // used to see which AI wins after player loses
-    return 0;
+    int totalValue = 0;
+
+    for (int i = 0; i < cards.size(); i++) {
+      totalValue += cards.get(i).getCardValue();
+    }
+    return totalValue;
   }
 
   public String toString() {

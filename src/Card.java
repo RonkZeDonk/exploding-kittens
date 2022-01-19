@@ -25,6 +25,7 @@ public class Card extends JPanel {
   public int type;
   public String name;
   public Color color;
+  private int cardValue;
   private boolean handCard = true;
   private boolean disabled = false;
 
@@ -46,66 +47,79 @@ public class Card extends JPanel {
       case DEFUSE:
         name = "Defuse";
         color = Color.green;
+        cardValue = 3;
         setToolTipText("");
         break;
       case SKIP:
         name = "Skip";
         color = Color.blue;
+        cardValue = 3;
         setToolTipText("trolling");
         break;
       case FAVOR:
         name = "Favor";
         color = Color.black;
+        cardValue = 2;
         setToolTipText("");
         break;
       case ATTACK:
         name = "Attack";
         color = Color.orange;
+        cardValue = 2;
         setToolTipText("");
         break;
       case SHUFFLE:
         name = "Shuffle";
         color = Color.gray;
+        cardValue = 2;
         setToolTipText("");
         break;
       case NOPE:
         name = "Nope";
         color = Color.red;
+        cardValue = 3;
         setToolTipText("");
         break;
       case PEAK_FUTURE:
         name = "Peak Future";
         color = Color.pink;
+        cardValue = 2;
         setToolTipText("");
         break;
       case RAINBOW_CAT:
         name = "Rainbow Cat";
         color = Color.white;
+        cardValue = 1;
         setToolTipText("");
         break;
       case BEARD_CAT:
         name = "Beard Cat";
         color = Color.white;
+        cardValue = 1;
         setToolTipText("");
         break;
       case CATTERMELON:
         name = "Cattermelon";
         color = Color.white;
+        cardValue = 1;
         setToolTipText("");
         break;
       case POTATO_CAT:
         name = "Potato Cat";
         color = Color.white;
+        cardValue = 1;
         setToolTipText("");
         break;
       case TACOCAT:
         name = "Tacocat";
         color = Color.white;
+        cardValue = 1;
         setToolTipText("");
         break;
       case EXPLODING_KITTEN:
         name = "Exploding Kitten";
         color = Color.black;
+        cardValue = 1;
         setToolTipText("");
         break;
     }
@@ -141,28 +155,37 @@ public class Card extends JPanel {
 
     addMouseListener(new MouseAdapter() {
       public void mouseEntered(java.awt.event.MouseEvent e) {
-        if (!disabled && handCard)
+        if (!disabled)
           setBackground(Color.lightGray);
       }
 
       public void mouseExited(java.awt.event.MouseEvent e) {
-        if (!disabled && handCard)
+        if (!disabled)
           setBackground(color);
       }
 
       public void mouseClicked(java.awt.event.MouseEvent e) {
         if (!disabled && handCard)
-          destory();
+        playCard();
+        destory();
       }
     });
   }
 
-  public void isHandCard(boolean value) {
+  public void playCard() {
+    ExplodingKittens.gameFrame.placeCardOnTable(this);
+  }
+
+  public void setHandCard(boolean value) {
     this.handCard = value;
   }
 
   public void setDisabled(boolean value) {
     disabled = value;
+  }
+
+  public int getCardValue() {
+    return cardValue;
   }
 
   public void destory() {

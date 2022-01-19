@@ -11,7 +11,8 @@ public class GameFrame extends JFrame implements KeyListener {
   private boolean cardsPanelOpen = false;
 
   public JPanel tablePanel;
-  Card cardPileFrame;
+  private Card cardPileFrame;
+  private Card tableCard;
 
   public String gamemode;
 
@@ -82,6 +83,7 @@ public class GameFrame extends JFrame implements KeyListener {
     this.cardsPanel.removeAll();
 
     hand.cards.forEach(n -> this.cardsPanel.add(n));
+    refreshCardsFrame();
   }
 
   public void removeCardFromFrame(Card card) {
@@ -116,19 +118,37 @@ public class GameFrame extends JFrame implements KeyListener {
     player3Name.setForeground(Color.black);
     tablePanel.add(player3Name);
 
-    Card tableCard = new Card(Card.EXPLODING_KITTEN);
-    tableCard.isHandCard(false);
+    tableCard = new Card(Card.EXPLODING_KITTEN);
+    tableCard.setHandCard(false);
+    tableCard.setDisabled(true);
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tablePanel.add(tableCard);
 
     cardPileFrame = new Card("Pickup Card", Color.white);
+    cardPileFrame.setHandCard(false);
     cardPileFrame.setBounds(50, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     cardPileFrame.onClick(() -> {
       // Add new card from deck to hand
       // if the card is an exploding kitten show on table...
-      System.out.println("Hey");
+      ExplodingKittens.hand.add(0, ExplodingKittens.deck.pickupCard());
+      if (ExplodingKittens.hand.cards.get(0).type == 12)
+        endGame();
+      displayHandOnFrame(ExplodingKittens.hand);
     });
     tablePanel.add(cardPileFrame);
+  }
+
+  public void placeCardOnTable(Card card) {
+    tableCard = card;
+    tableCard.setHandCard(false);
+    tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
+    tableCard.setBackground(tableCard.color);
+    tablePanel.add(tableCard);
+  }
+
+  public void endGame() {
+    System.out.println("You Exploded");
+    System.exit(0); // russian roulette
   }
 
   public void changeGamemode(String gamemode) {
