@@ -21,11 +21,6 @@ public class Hand {
     cards.add(index, card);
   }
 
-  public void play(Card card) {
-    cards.remove(card);
-    ExplodingKittens.gameFrame.refreshCardsFrame();
-  }
-
   public int handValue() {
     // Hand value based on the current hand
     // used to see which AI wins after player loses
