@@ -111,8 +111,6 @@ public class Card extends JPanel {
   }
 
   private void makeCardFrame() {
-    final String FONT_FACE = "Sans Serif";
-
     setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
     setLayout(new GridBagLayout());
     setBackground(color);
@@ -126,14 +124,14 @@ public class Card extends JPanel {
     GridBagConstraints c = new GridBagConstraints();
 
     JLabel title = new JLabel(this.name);
-    title.setFont(new Font(FONT_FACE, Font.PLAIN, 24));
+    title.setFont(new Font(GlobalConstants.FONT_FACE, Font.PLAIN, 24));
     title.setHorizontalAlignment(JLabel.CENTER);
     c.gridx = 0;
     c.gridy = 0;
     add(title, c);
 
     JLabel typeText = new JLabel("Details");
-    typeText.setFont(new Font(FONT_FACE, Font.PLAIN, 16));
+    typeText.setFont(new Font(GlobalConstants.FONT_FACE, Font.PLAIN, 16));
     title.setHorizontalAlignment(JLabel.CENTER);
     c.insets = new Insets(220, 0, 0, 0);
     c.gridx = 0;

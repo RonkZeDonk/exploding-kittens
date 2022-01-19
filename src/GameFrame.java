@@ -23,8 +23,7 @@ public class GameFrame extends JFrame implements KeyListener {
     addKeyListener(this);
 
     // Add Icon
-    ImageIcon icon = new ImageIcon("img/icon.png");
-    setIconImage(icon.getImage());
+    setIconImage(GlobalConstants.ICON.getImage());
 
     // Set Size
     setSize(1000, 600);
@@ -94,7 +93,7 @@ public class GameFrame extends JFrame implements KeyListener {
     tablePanel.setBackground(new Color(0x755831)); // set background to a wood-like colour
     add(tablePanel);
 
-    Font playerNameFont = new Font("Sans Serif", Font.BOLD, 21);
+    Font playerNameFont = new Font(GlobalConstants.FONT_FACE, Font.BOLD, 21);
     JLabel player1Name = new JLabel("Player 1 (10 Cards)");
     player1Name.setBounds(100, 8, 200, 24);
     player1Name.setHorizontalAlignment(SwingConstants.CENTER);

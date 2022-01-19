@@ -7,8 +7,7 @@ public class MainMenuFrame extends JFrame {
 
   public MainMenuFrame(GameFrame gameFrame) {
     super("Exploding Kittens | Main Menu");
-    ImageIcon icon = new ImageIcon("img/icon.png");
-    setIconImage(icon.getImage());
+    setIconImage(GlobalConstants.ICON.getImage());
     setSize(1000, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false);
@@ -16,7 +15,7 @@ public class MainMenuFrame extends JFrame {
 
     JLabel title = new JLabel("Exploding Kittens");
     title.setHorizontalAlignment(SwingConstants.CENTER);
-    title.setFont(new Font("Sans Serif", Font.PLAIN, 64));
+    title.setFont(new Font(GlobalConstants.FONT_FACE, Font.PLAIN, 64));
     title.setBounds(0, 300, 1000, 200);
     // title.setOpaque(true);
     // title.setBackground(Color.red);
