@@ -1,15 +1,15 @@
 * ---SETUP---
-* Remove all (4) exploding kittens
-* Remove all (6) defuse cards
+✅ Remove all (4) exploding kittens
+✅ Remove all (6) defuse cards
  	Give a defuse card to each player
  	then return remaining to the deck
  	in a random place (max 2 cards)
-* Give each player 7 more cards.
-* Insert (player_count - 1) exploding
+✅ Give each player 7 more cards.
+✅ Insert (player_count - 1) exploding
  	kittens into the deck
-* Shuffle deck
+✅ Shuffle deck
 * Pick someone to go first
- 	- Maybe do a wheel IDK 
+ 	- Maybe do a wheel IDK
  ---GAME---
 * Player must play a card then draw a card
  	Once the card is played it is removed
