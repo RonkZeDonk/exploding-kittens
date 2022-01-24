@@ -144,6 +144,10 @@ public class GameFrame extends JFrame implements KeyListener {
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tableCard.setBackground(tableCard.color);
     tablePanel.add(tableCard);
+
+    tableCard.invalidate();
+    tableCard.validate();
+    tableCard.repaint();
   }
 
   public void endGame() {
