@@ -48,79 +48,79 @@ public class Card extends JPanel {
         name = "Defuse";
         color = Color.green;
         cardValue = 3;
-        setToolTipText("");
+        setToolTipText("Defuse an exploding Kitten");
         break;
       case SKIP:
         name = "Skip";
         color = Color.blue;
         cardValue = 3;
-        setToolTipText("trolling");
+        setToolTipText("Skip your turn without drawing a card");
         break;
       case FAVOR:
         name = "Favor";
         color = Color.black;
         cardValue = 2;
-        setToolTipText("");
+        setToolTipText("Another player must give the player a card from their hand");
         break;
       case ATTACK:
         name = "Attack";
         color = Color.orange;
         cardValue = 2;
-        setToolTipText("");
+        setToolTipText("End turn without playing and make next player pickup 2 cards");
         break;
       case SHUFFLE:
         name = "Shuffle";
         color = Color.gray;
         cardValue = 2;
-        setToolTipText("");
+        setToolTipText("Shuffle the deck");
         break;
       case NOPE:
         name = "Nope";
         color = Color.red;
         cardValue = 3;
-        setToolTipText("");
+        setToolTipText("Stop a player from playing their card");
         break;
       case PEAK_FUTURE:
         name = "Peak Future";
         color = Color.pink;
         cardValue = 2;
-        setToolTipText("");
+        setToolTipText("See the next 3 cards in the deck");
         break;
       case RAINBOW_CAT:
         name = "Rainbow Cat";
         color = Color.white;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Steal a random card if you place a pair");
         break;
       case BEARD_CAT:
         name = "Beard Cat";
         color = Color.white;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Steal a random card if you place a pair");
         break;
       case CATTERMELON:
         name = "Cattermelon";
         color = Color.white;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Steal a random card if you place a pair");
         break;
       case POTATO_CAT:
         name = "Potato Cat";
         color = Color.white;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Steal a random card if you place a pair");
         break;
       case TACOCAT:
         name = "Tacocat";
         color = Color.white;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Steal a random card if you place a pair");
         break;
       case EXPLODING_KITTEN:
         name = "Exploding Kitten";
         color = Color.black;
         cardValue = 1;
-        setToolTipText("");
+        setToolTipText("Explode");
         break;
     }
   }
