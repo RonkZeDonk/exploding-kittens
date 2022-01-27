@@ -31,11 +31,12 @@ public class MainMenuFrame extends JFrame {
         gameFrame.changeGamemode("Singleplayer");
         gameFrame.setVisible(true);
         gameFrame.setLocation(getLocation());
+        ExplodingKittens.startGame();
         setVisible(false);
       }
     });
 
-    JButton partyMode_btn = new JButton("Party Mode");
+    JButton partyMode_btn = new JButton("Party (Multiplayer)");
     add(partyMode_btn);
     partyMode_btn.setBounds(250, 315, 250, 250);
     partyMode_btn.setEnabled(false);
@@ -46,20 +47,32 @@ public class MainMenuFrame extends JFrame {
         gameFrame.changeGamemode("Party (Multiplayer)");
         gameFrame.setVisible(true);
         gameFrame.setLocation(getLocation());
+        ExplodingKittens.startGame();
         setVisible(false);
       }
     });
 
     // Settings pannel
-    JPanel userPanel = new JPanel();
+    JPanel userPanel = new JPanel(new GridLayout(0,1));
     add(userPanel);
     userPanel.setBounds(500, 315, 500, 250);
-    userPanel.setBackground(Color.gray);
+    userPanel.setBorder(BorderFactory.createEtchedBorder());
+    // Username
     userPanel.add(new JLabel("Username:"));
     JTextField username = new JTextField("", 16);
     userPanel.add(username);
     JButton submitUsername = new JButton("Change!");
+    submitUsername.setBackground(Color.lightGray);
     userPanel.add(submitUsername);
     submitUsername.addActionListener(e -> System.out.println(username.getText()));
+    // Server IP
+    userPanel.add(new JSeparator());
+    userPanel.add(new JLabel("IP Address:"));
+    JTextField ipBox = new JTextField("", 16);
+    userPanel.add(ipBox);
+    JButton submitIp = new JButton("Connect!");
+    submitIp.setBackground(Color.lightGray);
+    userPanel.add(submitIp);
+    submitIp.addActionListener(e -> System.out.println(ipBox.getText()));
   }
 }

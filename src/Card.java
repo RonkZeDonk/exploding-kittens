@@ -53,7 +53,7 @@ public class Card extends JPanel {
       case SKIP:
         name = "Skip";
         color = Color.blue;
-        cardValue = 3;
+        cardValue = 2;
         setToolTipText("Skip your turn without drawing a card");
         break;
       case FAVOR:
@@ -173,6 +173,9 @@ public class Card extends JPanel {
   }
 
   public void playCard() {
+    ExplodingKittens.gameFrame.previousCard.setText(
+      ExplodingKittens.gameFrame.currentCard().name
+    );
     ExplodingKittens.gameFrame.placeCardOnTable(this);
   }
 
@@ -194,7 +197,7 @@ public class Card extends JPanel {
   }
 
   public String toString() {
-    return "Card: " + this.name + ", Color: " + this.color;
+    return "Card: " + this.name;
   }
 
   interface onClickEvent {

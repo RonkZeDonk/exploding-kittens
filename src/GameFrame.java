@@ -11,8 +11,13 @@ public class GameFrame extends JFrame implements KeyListener {
   private boolean cardsPanelOpen = false;
 
   public JPanel tablePanel;
+  public JLabel previousCard;
   private Card cardPileFrame;
   private Card tableCard;
+
+  JLabel player1Name;
+  JLabel player2Name;
+  JLabel player3Name;
 
   public String gamemode;
 
@@ -98,23 +103,25 @@ public class GameFrame extends JFrame implements KeyListener {
     tablePanel.setBackground(new Color(0x755831)); // set background to a wood-like colour
     add(tablePanel);
 
-    Font playerNameFont = new Font(GlobalConstants.FONT_FACE, Font.BOLD, 21);
-    JLabel player1Name = new JLabel("Player 1 (10 Cards)");
+    Font boldFont = new Font(GlobalConstants.FONT_FACE, Font.BOLD, 21);
+    player1Name = new JLabel("Player 1 (10 Cards)");
     player1Name.setBounds(100, 8, 200, 24);
     player1Name.setHorizontalAlignment(SwingConstants.CENTER);
-    player1Name.setFont(playerNameFont);
+    player1Name.setFont(boldFont);
     player1Name.setForeground(Color.black);
     tablePanel.add(player1Name);
-    JLabel player2Name = new JLabel("Player 2 (12 Cards)");
+
+    player2Name = new JLabel("Player 2 (12 Cards)");
     player2Name.setBounds(400, 8, 200, 24);
     player2Name.setHorizontalAlignment(SwingConstants.CENTER);
-    player2Name.setFont(playerNameFont);
+    player2Name.setFont(boldFont);
     player2Name.setForeground(Color.black);
     tablePanel.add(player2Name);
-    JLabel player3Name = new JLabel("Player 3 (4 Cards)");
+
+    player3Name = new JLabel("Player 3 (4 Cards)");
     player3Name.setBounds(700, 8, 200, 24);
     player3Name.setHorizontalAlignment(SwingConstants.CENTER);
-    player3Name.setFont(playerNameFont);
+    player3Name.setFont(boldFont);
     player3Name.setForeground(Color.black);
     tablePanel.add(player3Name);
 
@@ -124,22 +131,46 @@ public class GameFrame extends JFrame implements KeyListener {
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tablePanel.add(tableCard);
 
+    JLabel previousCardTitle = new JLabel("Previous Card:");
+    previousCardTitle.setBounds(410, 40, 200, 24);
+    previousCardTitle.setHorizontalAlignment(SwingConstants.CENTER);
+    previousCardTitle.setFont(boldFont);
+    previousCardTitle.setForeground(Color.black);
+    tablePanel.add(previousCardTitle);
+
+    previousCard = new JLabel("Exploding Kitten");
+    previousCard.setBounds(410, 64, 200, 24);
+    previousCard.setHorizontalAlignment(SwingConstants.CENTER);
+    previousCard.setFont(boldFont);
+    previousCard.setForeground(Color.black);
+    tablePanel.add(previousCard);
+
     cardPileFrame = new Card("Pickup Card", Color.white);
     cardPileFrame.setHandCard(false);
     cardPileFrame.setBounds(50, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
-    cardPileFrame.onClick(() -> {
-      // Add new card from deck to hand
-      // if the card is an exploding kitten show on table...
-      ExplodingKittens.hand.add(0, ExplodingKittens.deck.pickupCard());
-      if (ExplodingKittens.hand.cards.get(0).type == 12)
-        endGame();
-      displayHandOnFrame(ExplodingKittens.hand);
-    });
+    cardPileFrame.onClick(() -> pickupCard());
     tablePanel.add(cardPileFrame);
   }
 
+  public void pickupCard() {
+    // Add new card from deck to hand
+    // if the card is an exploding kitten show on table...
+    ExplodingKittens.hand.add(0, ExplodingKittens.deck.pickupCard());
+    if (ExplodingKittens.hand.cards.get(0).type == Card.EXPLODING_KITTEN && !tryToSave()) {
+      endGame(false);
+    } else {
+      displayHandOnFrame(ExplodingKittens.hand);
+      ExplodingKittens.turnNumber++;
+      ExplodingKittens.loop();
+    }
+  }
+
   public void placeCardOnTable(Card card) {
+    tablePanel.remove(tableCard);
     tableCard = card;
+    tableCard.setHandCard(false);
+    tableCard.setDisabled(true);
+
     tableCard.setHandCard(false);
     tableCard.setBounds(400, 100, Card.CARD_WIDTH, Card.CARD_HEIGHT);
     tableCard.setBackground(tableCard.color);
@@ -150,9 +181,34 @@ public class GameFrame extends JFrame implements KeyListener {
     tableCard.repaint();
   }
 
-  public void endGame() {
-    System.out.println("You Exploded");
-    System.exit(0); // russian roulette
+  public Card currentCard() {
+    return tableCard;
+  }
+
+  public void endGame(boolean won) {
+    System.out.println("Game Ended");
+    int winnerID = countOtherCards();
+    System.out.println("The winner is Player " + winnerID);
+    new EndScreen(winnerID).setVisible(true);
+    dispose();
+  }
+
+  public boolean tryToSave() {
+    // return true if you saved yourself
+    System.out.println("trying to save myself");
+    return false;
+  }
+
+  private int countOtherCards() {
+    int highest = 0;
+    int highestID = 0;
+    for (Player player : ExplodingKittens.otherPlayers) {
+      if (player.playerID != 0 && player.getTotalCardValue() > highest) {
+        highest = player.getTotalCardValue();
+        highestID = player.playerID;
+      }
+    }
+    return highestID; // returns id of winner
   }
 
   public void changeGamemode(String gamemode) {
@@ -163,9 +219,8 @@ public class GameFrame extends JFrame implements KeyListener {
   public void keyReleased(KeyEvent e) {
     // temp testing stuff (remove the first card)
     if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-      // cardsPanel.add(new Card("Insert", Color.orange).cardPanel, 0);
-      System.out.println("Removed a " + ExplodingKittens.deck.cards.remove(0).type);
-      displayHandOnFrame(ExplodingKittens.hand);
+
+      ExplodingKittens.otherPlayers[0].doTurn();
 
       refreshCardsFrame();
     }

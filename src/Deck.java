@@ -6,6 +6,7 @@ public class Deck {
 
   public Deck() {
     createDeck();
+    shuffleDeck();
   }
 
   // Some cards are renamed to better fit screen
@@ -77,6 +78,7 @@ public class Deck {
   }
 
   public Card pickupCard() {
+    if (cards.size() != 0);
     return cards.remove(0);
   }
 
